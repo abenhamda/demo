@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Logback main configuration file.
+This file (and included resources) are automatically reloaded every 60 seconds.
+
+How does it work?
+=================
+This file reads JNDI environment property "logging/confFile" to load proper configuration:
+ * Property "logging/confFile" is empty or undefined > including default configuration file (see "logback-default.xml").
+ * Property "logging/confFile" defined and target file exists > including corresponding configuration file.
+
+
+Included files
+==============
+Included configuration file(s) should respect the following format:
+
+  <?xml version="1.0" encoding="UTF-8"?>
+  <included>
+    [ ... ]
+  </included>
+
+See "src/main/resource/logback-default.xml" example.
+See http://logback.qos.ch/manual/configuration.html#fileInclusion for more details.
+
+
+Logback documentation
+=====================
+http://logback.qos.ch/manual/
+-->
+<configuration scan="true" scanPeriod="60 seconds" debug="true">
+
+
+	<!-- Stdout appender. -->
+	<appender name="CONSOLE_APPENDER" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>[%-5level] {%d{dd/MM/yyyy HH:mm:ss.SSS}} [%thread] %logger{35} - %msg%n</pattern>
+		</encoder>
+	</appender>
+
+	<!--
+	===========================================================================================
+	LOGGERS (must be placed AFTER appenders definition).
+	===========================================================================================
+	-->
+
+	<root level="WARN">
+		<appender-ref ref="CONSOLE_APPENDER" />
+	</root>
+
+	<logger name="fr.zenika.spring.mockmvc" level="DEBUG" />
+	<logger name="org.springframework" level="INFO" />
+
+
+</configuration>
